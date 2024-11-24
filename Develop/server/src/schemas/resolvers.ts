@@ -3,6 +3,7 @@
 import User from '../models/User.js';
 // import sign token function from auth
 import { signToken, AuthenticationError } from '../utils/auth.js';
+import {Types} from 'mongoose'
 
 
 interface User {
@@ -73,7 +74,7 @@ const resolvers ={
     addUser: async (_parent: any, { input }: AddUserArgs): Promise<{token: string; user: User}>=>{
       const user=await User.create({...input});
       const token=signToken(user.username, user.email, user._id);
-      return { token, user};
+      return { token, user: user as User};
     }, 
 
     login: async (_parent: any, { email, password }: LoginUserArgs): Promise<{ token: string; user: User }> => {
@@ -86,7 +87,7 @@ const resolvers ={
         throw new AuthenticationError('Wrong password');
       }
       const token = signToken(user.username, user.email, user._id);
-      return { token, user };
+      return { token, user: user as User };
     },
 
     saveBook: async (_parent: any, { input }: {input:SaveBookArgs}, context: Context): Promise<User | null> => {
@@ -106,7 +107,7 @@ const resolvers ={
           }
         );
 
-        return updatedUser; 
+        return updatedUser as User; 
       }
       throw new AuthenticationError('Not authenticated');
     },
@@ -122,8 +123,8 @@ const resolvers ={
 
           { new: true }
         );
-        
-        return updatedUser; 
+
+        return updatedUser as User; 
       }
       throw new AuthenticationError ('Not authenticated');
     },
