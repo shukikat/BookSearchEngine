@@ -1,8 +1,53 @@
-import type { Request, Response } from 'express';
+
 // import user model
-import User from '../../models/User.js';
+import User from '../models/User.js';
 // import sign token function from auth
-import { signToken } from '../../utils/auth.js';
+import { signToken, AuthenticationError } from '../utils/auth.js';
+
+interface AddUserArgs {
+  input:{
+    username: string;
+    email: string;
+    password: string;
+  }
+
+}
+
+interface LoginUserArgs {
+  email: string; 
+  password: string; 
+}
+
+interface UserArgs{
+  username: string; 
+}
+
+interface saveBookArgs {
+  bookId: string; 
+  author: string; 
+  title: string; 
+  image: string; 
+  link: string; 
+}
+
+interface removeBookArgs {
+  bookId: string;
+}
+
+
+const resolvers ={
+  Query: {
+     users: async(): Promise<User[]>=> {
+
+      return await User.find();
+     }, 
+
+     user: async (_parent: any, {username}: UserArgs)=> {
+      return User.findOne({username}).populate('user'); 
+     }
+
+  }
+}
 
 // get a single user by either their id or their username
 export const getSingleUser = async (req: Request, res: Response) => {
