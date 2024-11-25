@@ -14,7 +14,7 @@ dotenv.config();
 // }
 
 
-const authenticateToken=({req}: any) {
+export const authenticateToken=({req}: any) => {
   let token=req.body.token || req.query.token || req.headers.authorization; 
 
   if (req.headers.authorization){

@@ -17,7 +17,7 @@ user: User
 }
 
 type User{
-_id: string
+_id: String!
 username: String!
 email: String!
 savedBooks: [Book!]!
@@ -47,19 +47,18 @@ user(username: String!): User
 
 }
 
-Type Mutation {
-addUser: (input: UserInput!): Auth
-login:(email: String!, password: String!): Auth
-saveBook: (input: SaveBookInput!): User
-removeBook: (bookId: ID!): User
+type Mutation {
+addUser(input: UserInput!): Auth
+login(email: String!, password: String!): Auth
+saveBook(input: SaveBookInput!): User
+removeBook(bookId: ID!): User
 
 
 
 }
+`;
+
 
 export default typeDefs; 
 
-
-
-`
 

@@ -3,7 +3,7 @@
 import User from '../models/User.js';
 // import sign token function from auth
 import { signToken, AuthenticationError } from '../utils/auth.js';
-import {Types} from 'mongoose'
+//import {Types} from 'mongoose'
 
 
 interface User {
