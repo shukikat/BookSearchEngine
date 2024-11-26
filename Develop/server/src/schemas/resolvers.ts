@@ -27,9 +27,7 @@ interface LoginUserArgs {
   password: string; 
 }
 
-interface UserArgs{
-  username: string; 
-}
+
 
 interface SaveBookArgs {
   bookId: string; 
@@ -50,14 +48,7 @@ interface Context {
 
 const resolvers ={
   Query: {
-     users: async(): Promise<User[]>=> {
-
-      return await User.find();
-     }, 
-
-     user: async (_parent: any, {username}: UserArgs): Promise<User | null >=> {
-      return await User.findOne({username}); 
-     }, 
+ 
 
      me: async (_parent:any, _args: any, context: Context): Promise<User|null> => {
       if (context.user) {
