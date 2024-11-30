@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client'
 import type { FormEvent } from 'react';
 import {
   Container,
@@ -10,10 +12,12 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
+import { SAVE_BOOK } from '../utils/mutations';
+import { saveBook } from '../utils/API';
+import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import type { Book } from '../models/Book';
-import type { GoogleAPIBook } from '../models/GoogleAPIBook';
+import type { Book } from '../interfaces/Book';
+import type { GoogleAPIBook } from '../interfaces/GoogleAPIBook';
 
 const SearchBooks = () => {
   // create state for holding returned google api data
