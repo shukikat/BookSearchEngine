@@ -4,7 +4,7 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
-import type { User } from '../models/User';
+import type { User } from '../interfaces/User';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState<User>({
@@ -85,9 +85,8 @@ const SavedBooks = () => {
       <Container>
         <h2 className='pt-5'>
           {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? 'book' : 'books'
-              }:`
+            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'
+            }:`
             : 'You have no saved books!'}
         </h2>
         <Row>
