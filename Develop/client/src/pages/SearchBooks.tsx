@@ -99,10 +99,6 @@ const SearchBooks = () => {
         }
       })
 
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
       if (!response?.data){
         throw new Error ('Something went wrong!')
       }
